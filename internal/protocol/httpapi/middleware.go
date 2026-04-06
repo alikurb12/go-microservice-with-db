@@ -11,8 +11,8 @@ func RequestIDMiddleware(genID domain.IDGenerator) func(http.Handler) http.Handl
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			requestID := genID.NewID()
 			w.Header().Set(RequestIdHeader, requestID)
-			next.ServeHTTP(w, r)
+			ctx := WithRequestIdContext(r.Context(), requestID)
+			next.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
-
 }
