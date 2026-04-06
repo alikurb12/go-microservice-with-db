@@ -1,3 +1,3 @@
 package httpapi
 
-const RequestIdHeader = "RequestID"
+const RequestIdHeader = "Request-ID"
